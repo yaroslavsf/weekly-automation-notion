@@ -1,0 +1,15 @@
+{
+  "name": "weekly-automation-notion",
+  "version": "1.0.0",
+  "description": "node.js console app to create an annual set of weekly documentations in notion",
+  "main": "main.js",
+  "engines": {
+    "node": ">= 20.11.1"
+  },
+  "keywords": [],
+  "author": "Yaroslav Zhyvotovskyi",
+  "license": "MIT",
+  "dependencies": {
+    "@notionhq/client": "^2.2.15"
+  }
+}
