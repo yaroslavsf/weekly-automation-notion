@@ -1,0 +1,40 @@
+{
+    "en": {
+        "prompt" : {
+            "firstname": "What is your first name? ",
+            "lastname": "What is your last name? ",
+            "year": "What year? (yy) ",
+            "week_from": "Starting from what week? ",
+            "company" : "What's your company name? "
+        },
+        "page" : {
+            "documentation" : "Documentation",
+            "cw" : "CW",
+            "activities" : "Activities",
+            "activities_description" : "Day, Place, Date",
+            "activities_time" : "Time in h",
+            "weekly_review" : "Weekly~review",
+            "reflection" : "Reflection",
+            "week_mood": "Mood~of~the~week"
+        }
+    },
+    "de": {
+        "prompt" : {
+            "firstname": "Was ist dein Vorname? ",
+            "lastname": "Was ist dein Nachname? ",
+            "year": "Welche Jahr? (yy) ",
+            "week_from": "Ab welcher Wochennummer? ",
+            "company" : "Wie lautet dein Firmenname? "
+        },
+        "page" : {
+            "documentation" : "Arbeitsjournal",
+            "cw" : "KW",
+            "activities" : "Tätigkeiten",
+            "activities_description" : "Tag, Ort, Datum",
+            "activities_time" : "Zeit in h",
+            "weekly_review" : "Wochenrückblick",
+            "reflection" : "Reflexion",
+            "week_mood": "Stimmung der Woche"
+        }
+    }
+}

@@ -1,15 +1,20 @@
 const { Client } = require('@notionhq/client');
 const moment = require('moment');
 require("dotenv").config();
+const translations = require('./locales/translations.json');
+const { I18n } = require('i18n-js');
 
+const i18n = new I18n(translations);
+i18n.locale = `${process.env.LOCALE}`
 const prompt = require("prompt-sync")({ sigint: true });
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const parent_page_id = process.env.PARENT_PAGE_ID
 
-const firstname = prompt("What is your first name? ");
-const lastname = prompt("What is your last name? ");
-const year = prompt("What year? (yy) ");
-const week_from = prompt("Starting from what week? ");
+const firstname = prompt(i18n.t('prompt.firstname'));
+const lastname = prompt(i18n.t('prompt.lastname'));
+const year = prompt(i18n.t('prompt.year'));
+const week_from = prompt(i18n.t('prompt.week_from'));
+const company = prompt(i18n.t('prompt.company'));
 const week_to = 52; // Alblak?
 
 async function delay(ms) {
@@ -57,7 +62,7 @@ async function createWeekPage(notion, parentBlockId, weekNumber, year, firstname
             page_id: parentBlockId
         },  // Set the parent database ID
         properties: {
-            title: { title: [{ text: { content: `Arbeitsjournal-${firstname}-${lastname}-20${year}-${weekNumber}` } }] },
+            title: { title: [{ text: { content: `${i18n.t('page.documentation')}-${firstname}-${lastname}-20${year}-${weekNumber}` } }] },
         },
     });
 
@@ -87,7 +92,7 @@ async function createWeekPage(notion, parentBlockId, weekNumber, year, firstname
                                                 {
                                                     type: "text",
                                                     text: {
-                                                        content: "Documentation"
+                                                        content: i18n.t('page.documentation')
                                                     },
                                                     annotations: {
                                                         bold: true,
@@ -111,7 +116,7 @@ async function createWeekPage(notion, parentBlockId, weekNumber, year, firstname
                                                 {
                                                     type: "text",
                                                     text: {
-                                                        content: `CW ${weekNumber} / 20${year}`
+                                                        content: `${i18n.t('page.cw')} ${weekNumber} / 20${year}`
                                                     },
                                                     annotations: {
                                                         bold: true,
@@ -160,7 +165,7 @@ async function createWeekPage(notion, parentBlockId, weekNumber, year, firstname
                 object: 'block',
                 type: 'equation',
                 equation: {
-                    expression: '\\large Activities',
+                    expression: `\\large ${i18n.t('page.activities')}`,
                 },
             },
             {
@@ -175,9 +180,9 @@ async function createWeekPage(notion, parentBlockId, weekNumber, year, firstname
                             type: 'table_row',
                             table_row: {
                                 cells: [
-                                    [{ type: 'text', text: { content: 'Day, Place, Date' } }],
-                                    [{ type: 'text', text: { content: 'Activities' } }],
-                                    [{ type: 'text', text: { content: 'Time in h' } }],
+                                    [{ type: 'text', text: { content: i18n.t('page.activities_description') } }],
+                                    [{ type: 'text', text: { content: i18n.t('page.activities') } }],
+                                    [{ type: 'text', text: { content: i18n.t('page.activities_time') } }],
                                 ],
                             },
                         },
@@ -188,7 +193,7 @@ async function createWeekPage(notion, parentBlockId, weekNumber, year, firstname
                                 type: 'table_row',
                                 table_row: {
                                     cells: [
-                                        [{ type: 'text', text: { content: `${dayOfWeek.format('dddd')}, NY, ${dayOfWeek.format('DD.MM.YY')}` } }],
+                                        [{ type: 'text', text: { content: `${dayOfWeek.format('dddd')}, ${company}, ${dayOfWeek.format('DD.MM.YY')}` } }],
                                         [{ type: 'text', text: { content: '-' } }],
                                         [{ type: 'text', text: { content: '8.4' } }],
                                     ],
@@ -203,7 +208,7 @@ async function createWeekPage(notion, parentBlockId, weekNumber, year, firstname
                 object: 'block',
                 type: 'equation',
                 equation: {
-                    expression: '\\large Weekly~review',
+                    expression: `\\large ${i18n.t('page.weekly_review')}`,
                 },
             },
             {
@@ -224,7 +229,7 @@ async function createWeekPage(notion, parentBlockId, weekNumber, year, firstname
                 object: 'block',
                 type: 'equation',
                 equation: {
-                    expression: '\\large Reflection',
+                    expression: `\\large ${i18n.t('page.reflection')}`,
                 },
             },
             {
@@ -245,7 +250,7 @@ async function createWeekPage(notion, parentBlockId, weekNumber, year, firstname
                 object: 'block',
                 type: 'equation',
                 equation: {
-                    expression: '\\large Mood~of~the~week',
+                    expression: `\\large ${i18n.t('page.week_mood')}`,
                 },
             },
             {
