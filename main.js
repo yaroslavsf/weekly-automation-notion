@@ -62,7 +62,7 @@ async function createWeekPage(notion, parentBlockId, weekNumber, year, firstname
             page_id: parentBlockId
         },  // Set the parent database ID
         properties: {
-            title: { title: [{ text: { content: `${i18n.t('page.documentation')}-${firstname}-${lastname}-20${year}-${weekNumber}` } }] },
+            title: { title: [{ text: { content: `${i18n.t('page.documentation')}-${lastname.charAt(0).toLowerCase() + lastname.slice(1)}-${firstname.charAt(0).toLowerCase() + firstname.slice(1)}-20${year}-${weekNumber < 10 ? '0' + weekNumber : weekNumber}` } }] },
         },
     });
 
